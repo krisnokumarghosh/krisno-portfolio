@@ -9,6 +9,8 @@ import {
   Envelope,
 } from "@gravity-ui/icons";
 import { grotesk } from "@/lib/font";
+import RollingText from "./animations/RollingText";
+import RollingText2 from "./animations/RollingText2";
 
 const NAV_LINKS = [
   { label: "ABOUT", href: "#about", icon: Person },
@@ -37,9 +39,9 @@ export default function SiteNavbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm tracking-[0.15em] font-medium text-[#8A8A85] hover:text-[#A69C7C] transition-colors"
+                className="text-sm tracking-[0.15em] font-bold text-[#8A8A85] hover:text-[#A69C7C] transition-colors"
               >
-                {item.label}
+                 <RollingText2 text={item.label}/>
               </Link>
             ))}
           </nav>
@@ -47,8 +49,8 @@ export default function SiteNavbar() {
       </header>
 
       {/* Mobile floating glass capsule nav */}
-      <nav
-        className="sm:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-sm rounded-full border border-white/40 bg-[#E9E7E1]/50 backdrop-blur-xl shadow-[0_8px_30px_rgba(22,21,19,0.12)] px-2 py-2"
+      {/* <nav
+        className="sm:hidden fixed bottom-2 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-sm rounded-full border border-white/40 bg-[#E9E7E1]/50 backdrop-blur-xl shadow-[0_8px_30px_rgba(22,21,19,0.12)] px-2 py-2"
         aria-label="Primary"
       >
         <ul className="flex items-center justify-between">
@@ -85,7 +87,7 @@ export default function SiteNavbar() {
             );
           })}
         </ul>
-      </nav>
+      </nav> */}
     </>
   );
 }
