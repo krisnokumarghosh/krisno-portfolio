@@ -1,5 +1,8 @@
 import { grotesk } from "@/lib/font";
 import Link from "next/link";
+import RollingText from "./animations/RollingText";
+import MagneticButton from "./animations/MagneticButton";
+import RotatingTagline from "./animations/RotatingTagline";
 
 export default function Hero() {
   return (
@@ -9,24 +12,28 @@ export default function Hero() {
 
       <div className="relative max-w-5xl mx-auto">
         <h1 className= {`${grotesk.className} font-extrabold uppercase tracking-tight text-[#161513] text-4xl sm:text-6xl md:text-8xl leading-[0.95]`}>
-          Krisno Kumar Ghosh
+          <RollingText text="Krisno Kumar Ghosh" />
         </h1>
 
         <p className="mt-8 text-[#8A8A85] text-base sm:text-xl leading-relaxed max-w-2xl mx-auto">
           Open to job opportunities worldwide. Passionate about building polished, intuitive, and thoughtful digital experiences that leave a mark.
         </p>
 
-        <p className="mt-10 text-[12px] tracking-[0.25em] font-medium text-[#8A8A85] uppercase">
-          Open to work worldwide
+       <p className="mt-10 text-[12px] tracking-[0.25em] font-medium text-[#8A8A85] uppercase">
+          <RotatingTagline />
         </p>
 
-        <div className="mt-10 flex items-center justify-center gap-4">
-          <Link href="#contact" className="rounded-full bg-[#161513] text-[#EDEBE5] text-xs font-semibold tracking-wide px-8 py-3.5 hover:bg-[#2a2825] transition-colors">
-            CONTACT
-          </Link>
-          <Link href="/resume.pdf" className="rounded-full border border-[#C9C7C0] text-[#8A8A85] text-xs font-semibold tracking-wide px-8 py-3.5 hover:border-[#A69C7C] hover:text-[#A69C7C] transition-colors">
-            RESUME
-          </Link>
+        <div className="mt-10 flex items-center justify-center gap-6">
+          <MagneticButton strength={0.35}>
+            <Link href="#contact" className="rounded-full bg-[#161513] text-[#EDEBE5] text-xs font-semibold tracking-wide px-8 py-3.5 hover:bg-[#2a2825] transition-colors">
+              CONTACT
+            </Link>
+          </MagneticButton>
+          <MagneticButton strength={0.35}>
+            <Link href="/resume.pdf" className="rounded-full border border-[#C9C7C0] text-[#8A8A85] text-xs font-semibold tracking-wide px-8 py-3.5 hover:border-[#A69C7C] hover:text-[#A69C7C] transition-colors">
+              RESUME
+            </Link>
+          </MagneticButton>
         </div>
       </div>
 
