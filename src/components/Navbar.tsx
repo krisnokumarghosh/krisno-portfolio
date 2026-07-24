@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+// import { useState } from "react";
 import Link from "next/link";
 import {
   Person,
@@ -9,18 +9,17 @@ import {
   Envelope,
 } from "@gravity-ui/icons";
 import { grotesk } from "@/lib/font";
-import RollingText from "./animations/RollingText";
 import RollingText2 from "./animations/RollingText2";
 
 const NAV_LINKS = [
   { label: "ABOUT", href: "#about", icon: Person },
-  { label: "SERVICES", href: "#services", icon: Gear },
-  { label: "WORK", href: "#work", icon: Briefcase },
+  { label: "SKILLS", href: "#skills", icon: Gear },
+  { label: "PROJECTS", href: "#projects", icon: Briefcase },
   { label: "CONTACT", href: "#contact", icon: Envelope },
 ];
 
 export default function SiteNavbar() {
-  const [active, setActive] = useState(0);
+  // const [active, setActive] = useState(0);
 
   return (
     <>
@@ -31,7 +30,7 @@ export default function SiteNavbar() {
             href="/"
             className= {`${grotesk.className} text-xl tracking-wide text-[#A69C7C] hover:text-[#8f8567] transition-colors`}
           >
-            Krisno.
+            KRISNO.
           </Link>
 
           <nav className="hidden sm:flex items-center gap-8">

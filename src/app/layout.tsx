@@ -3,6 +3,7 @@ import { Manrope } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import SmoothScroll from "@/components/animations/SmoothScroll";
+import Footer from "@/components/Footer";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-[#E9E7E1]">
         <Navbar />
         <main> <SmoothScroll>{children}</SmoothScroll></main>
+        <Footer/>
       </body>
     </html>
   );

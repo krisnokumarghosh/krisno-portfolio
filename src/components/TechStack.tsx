@@ -100,7 +100,7 @@ const itemVariants: Variants = {
 
 export default function TechStack() {
   return (
-    <section className="relative bg-[#161513] px-6 sm:px-12 pb-15 md:py-32 overflow-hidden">
+    <section id="skills" className="relative bg-[#161513] px-6 sm:px-12 pb-15 md:py-32 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 40 }}

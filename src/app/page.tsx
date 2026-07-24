@@ -1,3 +1,4 @@
+import ContactSection from "@/components/ContactSection";
 import Education from "@/components/Education";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
@@ -12,6 +13,7 @@ export default function Home() {
     <TechStack/>
     <Education/>
     <Projects/>
+    <ContactSection/>
    </div>
   );
 }

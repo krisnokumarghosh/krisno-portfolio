@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import RollingText from "./animations/RollingText";
 import MagneticButton from "./animations/MagneticButton";
 import RotatingTagline from "./animations/RotatingTagline";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -121,6 +122,15 @@ export default function Hero() {
               <RollingText text="Resume" />
             </Link>
           </MagneticButton>
+        </div>
+        
+        <div className="mt-10 flex gap-5 justify-center items-center">
+          <Link href={"https://github.com/krisnokumarghosh"} className="rounded-full  border border-[#C9C7C0] text-[#8A8A85]  font-semibold    hover:border-[#A69C7C] hover:text-[#A69C7C] p-3 transition-colors">
+         <FaGithub />
+          </Link>
+          <Link href={"https://www.linkedin.com/in/krisno-ghosh/"} className="rounded-full  border border-[#C9C7C0] text-[#8A8A85]  font-semibold    hover:border-[#A69C7C] hover:text-[#A69C7C] p-3 transition-colors">
+         <FaLinkedin />
+          </Link>
         </div>
       </div>
     </section>
