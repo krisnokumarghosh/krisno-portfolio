@@ -1,0 +1,80 @@
+[
+    {
+        "id": "01" ,
+        "name": "Promptly",
+        "description": "A prompt shareing and creating marketplace",
+        "techStack": {
+            "Frontend": ["Next.js", "JavaScript", "BetterAuth", "HeroUI", "Tailwind"],
+            "Backend": ["Node.js", "Express.js"],
+            "Database": ["MongoDB"]
+        },
+        "liveLink": "https://promptly-ten-xi.vercel.app",
+        "githubRepo": "https://github.com/krisnokumarghosh/Promptly",
+        "image": "/images/promptly"
+    },
+    {
+        "id": "02" ,
+        "name": "Quillo",
+        "description": "Blog creating and exploring website",
+        "techStack": {
+            "Frontend": ["Next.js", "TypeScript", "BetterAuth", "HeroUI", "Tailwind"],
+            "Backend": ["Node.js", "Express.js"],
+            "Database": ["MongoDB"]
+        },
+        "liveLink": "https://quillo-kappa.vercel.app",
+        "githubRepo": "https://github.com/krisnokumarghosh/quillo",
+        "image": "/images/quillo"
+    },
+    {
+        "id": "03" ,
+        "name": "Woodora",
+        "description": "A furniture based E-commerce website",
+        "techStack": {
+            "Frontend": ["Next.js", "TypeScript", "BetterAuth", "HeroUI", "Tailwind"],
+            "Backend": ["Node.js", "Express.js"],
+            "Database": ["MongoDB"]
+        },
+        "liveLink": "https://woodora-orcin.vercel.app",
+        "githubRepo": "https://github.com/krisnokumarghosh/woodora",
+        "image": "/images/woodora"
+    },
+    {
+        "id": "04" ,
+        "name": "Medzy",
+        "description": "A full-stack doctor appointment web application.",
+        "techStack": {
+            "Frontend": ["Next.js", "JavaScript", "BetterAuth", "HeroUI", "Tailwind"],
+            "Backend": ["Node.js", "Express.js"],
+            "Database": ["MongoDB"]
+        },
+        "liveLink": "https://medzy-iota.vercel.app",
+        "githubRepo": "https://github.com/krisnokumarghosh/A09-Medzy",
+        "image": "/images/medzy"
+    },
+    {
+        "id": "05" ,
+        "name": "Tiles Gallery",
+        "description": "A full-featured e-commerce style showcase platform for a tile shop",
+        "techStack": {
+            "Frontend": ["React", "React Router", "React Hook Form", "JavaScript", "BetterAuth", "HeroUI", "Tailwind"],
+            "Backend": ["Node.js", "Express.js"],
+            "Database": ["MongoDB"]
+        },
+        "liveLink": "https://a8-tiles-gallery.vercel.app",
+        "githubRepo": "https://github.com/krisnokumarghosh/A8-Tiles-Gallery",
+        "image": "/images/tiles"
+    },
+    {
+        "id": "06" ,
+        "name": "Promptly",
+        "description": "A prompt shareing and creating marketplace",
+        "techStack": {
+            "Frontend": ["React", "React Router", "JavaScript", "BetterAuth", "DaisyUI", "Tailwind"],
+            "Backend": ["Node.js", "Express.js"],
+            "Database": ["MongoDB"]
+        },
+        "liveLink": "https://a07-keen-keeper-project.vercel.app/",
+        "githubRepo": "https://github.com/krisnokumarghosh/A07-Keen-Keeper-Project",
+        "image": "/images/keen"
+    }
+]

@@ -14,6 +14,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // standard ease-out
       smoothWheel: true,
       touchMultiplier: 1.5,
+      anchors: true,
     });
 
     // Lenis-er scroll update-er sathe ScrollTrigger-ke sync kora —

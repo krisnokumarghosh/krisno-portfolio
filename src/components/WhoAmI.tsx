@@ -9,7 +9,7 @@ const PARAGRAPHS = [
 
 export default function WhoAmI() {
   return (
-    <section className="relative bg-[#161513] px-6 sm:px-12 py-24 sm:py-32 overflow-hidden">
+    <section id="about" className="relative bg-[#161513] px-6 sm:px-12 py-24 sm:py-32 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <h2 data-reveal="heading" className={`${grotesk.className} font-extrabold uppercase tracking-tight text-[#EDEBE5] text-5xl sm:text-6xl md:text-7xl leading-[0.95]`}>
           Who am I

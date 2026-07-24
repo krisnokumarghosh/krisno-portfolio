@@ -40,6 +40,7 @@ export default function SiteNavbar() {
                 key={item.href}
                 href={item.href}
                 className="text-sm tracking-[0.15em] font-bold text-[#8A8A85] hover:text-[#A69C7C] transition-colors"
+                
               >
                  <RollingText2 text={item.label}/>
               </Link>
