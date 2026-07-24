@@ -8,7 +8,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import RollingText from "./animations/RollingText";
 import MagneticButton from "./animations/MagneticButton";
 import RotatingTagline from "./animations/RotatingTagline";
-import { Chip } from "@heroui/react";
 
 gsap.registerPlugin(ScrollTrigger);
 

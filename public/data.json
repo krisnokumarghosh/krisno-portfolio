@@ -66,8 +66,8 @@
     },
     {
         "id": "06" ,
-        "name": "Promptly",
-        "description": "A prompt shareing and creating marketplace",
+        "name": "KeenKeeper",
+        "description": "A friendship related website where you can find your friends and can see his/her details.",
         "techStack": {
             "Frontend": ["React", "React Router", "JavaScript", "BetterAuth", "DaisyUI", "Tailwind"],
             "Backend": ["Node.js", "Express.js"],
