@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import SmoothScroll from "@/components/animations/SmoothScroll";
 import Footer from "@/components/Footer";
+import { Toast } from "@heroui/react";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${manrope.className} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-[#E9E7E1]">
+        <Toast.Provider/>
         <Navbar />
         <main> <SmoothScroll>{children}</SmoothScroll></main>
         <Footer/>

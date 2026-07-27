@@ -1,1 +1,21 @@
 @import "tailwindcss";
+@import "@heroui/styles";
+
+
+.toast--success {
+  background-color: #A69C7C !important;
+  color: #F5F0E6 !important;
+}
+
+.toast__title {
+  font-weight: 600 !important;
+  color: #F5F0E6 !important;
+}
+
+.toast__indicator {
+  color: #F5F0E6 !important;
+}
+
+.toast--danger {
+  background-color: #161513 !important;
+}

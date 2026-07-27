@@ -1,14 +1,10 @@
 "use client";
 
-import { useRef, useState, FormEvent } from "react";
-import {
-  motion,
-  useInView,
-  AnimatePresence,
-  type Variants,
-} from "framer-motion";
-import { TextArea } from "@heroui/react";
+import { useRef, useState } from "react";
+import { motion, useInView, type Variants } from "framer-motion";
+import { Button, Input, Label, TextArea, TextField } from "@heroui/react";
 import { grotesk } from "@/lib/font";
+import { errorToast, successToast } from "@/lib/toasts";
 
 /**
  * Contact Section
@@ -21,27 +17,12 @@ import { grotesk } from "@/lib/font";
  *  - Filled button: #161513 bg, hover #2a2825 (same as Hero's "Contact" button)
  *  - Outline hover accent: #A69C7C (same as Hero's "Resume" button)
  *  - Dot-grid backdrop: #C9C7C0 radial dots, same pattern as Hero
- *
- * Stack assumed: Next.js (TS) + Tailwind. Swap the <input>/<textarea>
- * elements for HeroUI's <Input>/<Textarea> if you want HeroUI's own
- * styling — the layout, motion and validation logic stay identical.
  */
-
-const MIN_MESSAGE_LENGTH = 30;
 
 const EMAIL = "krishnokumarghosh112@gmail.com";
 const PHONE: string = "01929999831"; // TODO: add your number here, e.g. "+880 1XXX-XXXXXX"
 
 const EASE_OUT: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
-type FormState = {
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
-};
-
-type Status = "idle" | "submitting" | "success" | "error";
 
 const fieldVariants: Variants = {
   hidden: { opacity: 0, y: 18 },
@@ -55,41 +36,46 @@ const fieldVariants: Variants = {
 export default function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: "-15% 0px" });
+  const [isSending, setIsSending] = useState(false);
 
-  const [form, setForm] = useState<FormState>({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-  const [status, setStatus] = useState<Status>("idle");
-
-  const messageLen = form.message.trim().length;
-  const canSubmit =
-    form.name.trim().length > 0 &&
-    form.email.trim().length > 0 &&
-    messageLen >= MIN_MESSAGE_LENGTH &&
-    status !== "submitting";
-
-  function handleChange<K extends keyof FormState>(key: K, value: string) {
-    setForm((prev) => ({ ...prev, [key]: value }));
+  const handleEmailCopy = () => {
+     navigator.clipboard.writeText("krishnokumarghosh112@gmail.com");
+     successToast("Email copied to clipboard!");
+  }
+  const handlePhoneCopy = () => {
+     navigator.clipboard.writeText("01929999831");
+     successToast("Email copied to clipboard!");
   }
 
-  async function handleSubmit(e: FormEvent) {
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!canSubmit) return;
+    const form = e.currentTarget;
+    setIsSending(true);
 
-    setStatus("submitting");
+    const formData = new FormData(e.currentTarget);
+    const payload = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
+
     try {
-      // Replace with your actual endpoint / API route / email service call.
-      // await fetch("/api/contact", { method: "POST", body: JSON.stringify(form) });
-      await new Promise((res) => setTimeout(res, 1200));
-      setStatus("success");
-      setForm({ name: "", email: "", phone: "", message: "" });
-      setTimeout(() => setStatus("idle"), 3000);
-    } catch {
-      setStatus("error");
-      setTimeout(() => setStatus("idle"), 3000);
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error("Failed to send message");
+      successToast("Thanks for reaching out — I'll get back to you soon.");
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      errorToast(
+        "Something went wrong. Please try again or email me directly.",
+      );
+    } finally {
+      setIsSending(false);
     }
   }
 
@@ -116,7 +102,9 @@ export default function ContactSection() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: EASE_OUT }}
         >
-          <h2 className={`${grotesk.className} font-extrabold uppercase tracking-tight text-[#161513] text-4xl sm:text-5xl md:text-6xl leading-[0.95]`}>
+          <h2
+            className={`${grotesk.className} font-extrabold uppercase tracking-tight text-[#161513] text-4xl sm:text-5xl md:text-6xl leading-[0.95]`}
+          >
             Contact
           </h2>
           <motion.span
@@ -147,21 +135,15 @@ export default function ContactSection() {
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
             >
-              <label
-                htmlFor="name"
-                className="mb-2 block text-sm font-medium text-[#E9E7E1]"
-              >
-                Your Name <span className="text-[#A6675A]">*</span>
-              </label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Your Name"
-                value={form.name}
-                onChange={(e) => handleChange("name", e.target.value)}
-                required
-                className="w-full rounded-lg border border-white/5 bg-white/5 px-4 py-3 text-sm text-[#E9E7E1] placeholder:text-[#9E9E98] outline-none transition-colors duration-200 focus:border-[#C9C7C0]"
-              />
+              <TextField isRequired name="name" type="text">
+                <Label className="mb-2 block text-sm font-medium text-[#E9E7E1]">
+                  Your Name
+                </Label>
+                <Input
+                  placeholder="Your Name"
+                  className="w-full rounded-lg border border-white/5 bg-white/5 px-4 py-3 text-sm text-[#E9E7E1] placeholder:text-[#9E9E98] outline-none transition-colors duration-200 focus:border-[#C9C7C0]"
+                />
+              </TextField>
             </motion.div>
 
             {/* Email */}
@@ -171,47 +153,25 @@ export default function ContactSection() {
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
             >
-              <label
-                htmlFor="email"
-                className="mb-2 block text-sm font-medium text-[#E9E7E1]"
-              >
-                Your Email <span className="text-[#A6675A]">*</span>
-              </label>
-              <input
-                id="email"
+              <TextField
+                isRequired
+                name="email"
                 type="email"
-                placeholder="you@example.com"
-                value={form.email}
-                onChange={(e) => handleChange("email", e.target.value)}
-                required
-               className="w-full rounded-lg border border-white/5 bg-white/5 px-4 py-3 text-sm text-[#E9E7E1] placeholder:text-[#9E9E98] outline-none transition-colors duration-200 focus:border-[#C9C7C0]"
-              />
-            </motion.div>
-
-            {/* Phone (optional) */}
-            <motion.div
-              custom={2}
-              variants={fieldVariants}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-            >
-              <label
-                htmlFor="phone"
-                className="mb-2 block text-sm font-medium text-[#E9E7E1]"
+                validate={(value) => {
+                  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+                    return "Please enter a valid email address";
+                  }
+                  return null;
+                }}
               >
-                Phone Number{" "}
-                <span className="text-xs font-normal text-[#9E9E98]">
-                  (optional)
-                </span>
-              </label>
-              <input
-                id="phone"
-                type="tel"
-                placeholder="+880 1XXX-XXXXXX"
-                value={form.phone}
-                onChange={(e) => handleChange("phone", e.target.value)}
-                className="w-full rounded-lg border border-white/5 bg-white/5 px-4 py-3 text-sm text-[#E9E7E1] placeholder:text-[#9E9E98] outline-none transition-colors duration-200 focus:border-[#C9C7C0]"
-              />
+                <Label className="mb-2 block text-sm font-medium text-[#E9E7E1]">
+                  Your Email
+                </Label>
+                <Input
+                  placeholder="you@example.com"
+                  className="w-full rounded-lg border border-white/5 bg-white/5 px-4 py-3 text-sm text-[#E9E7E1] placeholder:text-[#9E9E98] outline-none transition-colors duration-200 focus:border-[#C9C7C0]"
+                />
+              </TextField>
             </motion.div>
 
             {/* Message */}
@@ -221,22 +181,16 @@ export default function ContactSection() {
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
             >
-              <label
-                htmlFor="message"
-                className="mb-2 block text-sm font-medium text-[#E9E7E1]"
-              >
-                Message <span className="text-[#A6675A]">*</span>
-              </label>
-              <TextArea
-                id="message"
-                rows={5}
-                placeholder="Write your message here..."
-                value={form.message}
-                onChange={(e) => handleChange("message", e.target.value)}
-                required
-                className="w-full resize-none rounded-lg border border-white/5 bg-white/5 px-4 py-3 text-sm text-[#E9E7E1] placeholder:text-[#9E9E98] outline-none transition-colors duration-200 focus:border-[#C9C7C0]"
-              />
-             
+              <TextField isRequired type="text" name="message">
+                <Label className="mb-2 block text-sm font-medium text-[#E9E7E1]">
+                  Message
+                </Label>
+                <TextArea
+                  rows={5}
+                  placeholder="Write your message here..."
+                  className="w-full resize-none rounded-lg border border-white/5 bg-white/5 px-4 py-3 text-sm text-[#E9E7E1] placeholder:text-[#9E9E98] outline-none transition-colors duration-200 focus:border-[#C9C7C0]"
+                />
+              </TextField>
             </motion.div>
 
             {/* Submit */}
@@ -247,47 +201,13 @@ export default function ContactSection() {
               animate={inView ? "visible" : "hidden"}
               className="mt-1"
             >
-              <motion.button
+              <Button
                 type="submit"
-                disabled={!canSubmit}
-                whileHover={canSubmit ? { scale: 1.03 } : {}}
-                whileTap={canSubmit ? { scale: 0.97 } : {}}
-                className="relative overflow-hidden rounded-full bg-[#EDEBE5] text-[#161513] px-7 py-3.5 text-xs font-semibold uppercase tracking-wide hover:bg-white transition-colors duration-200  "
+                isDisabled={isSending}
+                className="relative overflow-hidden rounded-full bg-[#EDEBE5] text-[#161513] px-7 py-3.5 text-xs font-semibold uppercase tracking-wide hover:bg-white transition-colors duration-200"
               >
-                <AnimatePresence mode="wait" initial={false}>
-                  {status === "submitting" ? (
-                    <motion.span
-                      key="sending"
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      className="block"
-                    >
-                      Sending...
-                    </motion.span>
-                  ) : status === "success" ? (
-                    <motion.span
-                      key="sent"
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      className="block"
-                    >
-                      Message Sent ✓
-                    </motion.span>
-                  ) : (
-                    <motion.span
-                      key="send"
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      className="block"
-                    >
-                      Send Message
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </motion.button>
+                {isSending ? "Sending..." : "Send Message"}
+              </Button>
             </motion.div>
           </div>
         </motion.form>
@@ -304,23 +224,22 @@ export default function ContactSection() {
           </p>
 
           <motion.p
-            
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.6, ease: EASE_OUT }}
-            
-            className="mt-4 block wrap-break-word font-sans text-3xl font-extrabold uppercase tracking-tight text-[#161513] transition-colors duration-300 hover:text-[#A69C7C] sm:text-5xl"
+            onClick={handleEmailCopy}
+            className="mt-4 block wrap-break-word font-sans text-3xl font-extrabold  tracking-tight text-[#161513] transition-colors duration-300 hover:text-[#A69C7C] sm:text-5xl"
           >
             {EMAIL}
           </motion.p>
 
           {PHONE && (
             <motion.p
-             
               initial={{ opacity: 0, y: 12 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.7 }}
-              className="mt-3 block md:text-xl text-[#8A8A85] transition-colors duration-300 hover:text-[#161513]"
+              onClick={handlePhoneCopy}
+              className="mt-6 block md:text-xl text-[#8A8A85] transition-colors duration-300 hover:text-[#161513]"
             >
               {PHONE}
             </motion.p>
