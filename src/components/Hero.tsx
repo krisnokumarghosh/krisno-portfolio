@@ -99,11 +99,10 @@ export default function Hero() {
           polished, intuitive, and thoughtful digital experiences that leave a
           mark.
         </p>
-        
-          <p className="mt-7 md:mt-10 text-[10px] md:text-[12px] tracking-[0.25em] font-bold text-[#8A8A85] uppercase">
-            <RotatingTagline />
-          </p>
-        
+
+        <p className="mt-7 md:mt-10 text-[10px] md:text-[12px] tracking-[0.25em] font-bold text-[#8A8A85] uppercase">
+          <RotatingTagline />
+        </p>
 
         <div className="mt-7 md:mt-12 flex items-center justify-center gap-6">
           <MagneticButton strength={0.35}>
@@ -115,21 +114,29 @@ export default function Hero() {
             </Link>
           </MagneticButton>
           <MagneticButton strength={0.35}>
-            <Link
-              href="/resume.pdf"
+            <a
+              href="/KrisnoKumarGhosh_resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full border border-[#C9C7C0] text-[#8A8A85] text-xs md:text-[16px] font-semibold tracking-wide px-8 py-3.5 hover:border-[#A69C7C] hover:text-[#A69C7C] transition-colors"
             >
               <RollingText text="Resume" />
-            </Link>
+            </a>
           </MagneticButton>
         </div>
-        
+
         <div className="mt-10 flex gap-5 justify-center items-center">
-          <Link href={"https://github.com/krisnokumarghosh"} className="rounded-full  border border-[#C9C7C0] text-[#8A8A85]  font-semibold    hover:border-[#A69C7C] hover:text-[#A69C7C] p-3 transition-colors">
-         <FaGithub />
+          <Link
+            href={"https://github.com/krisnokumarghosh"}
+            className="rounded-full  border border-[#C9C7C0] text-[#8A8A85]  font-semibold    hover:border-[#A69C7C] hover:text-[#A69C7C] p-3 transition-colors"
+          >
+            <FaGithub />
           </Link>
-          <Link href={"https://www.linkedin.com/in/krisno-ghosh/"} className="rounded-full  border border-[#C9C7C0] text-[#8A8A85]  font-semibold    hover:border-[#A69C7C] hover:text-[#A69C7C] p-3 transition-colors">
-         <FaLinkedin />
+          <Link
+            href={"https://www.linkedin.com/in/krisno-ghosh/"}
+            className="rounded-full  border border-[#C9C7C0] text-[#8A8A85]  font-semibold    hover:border-[#A69C7C] hover:text-[#A69C7C] p-3 transition-colors"
+          >
+            <FaLinkedin />
           </Link>
         </div>
       </div>
